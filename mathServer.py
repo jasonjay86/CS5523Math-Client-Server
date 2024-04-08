@@ -20,7 +20,7 @@ def divide(x, y):
 server = xmlrpc.server.SimpleXMLRPCServer(("localhost", 8000))
 
 # Register the functions to be exposed
-server.register_function(add, "add")
+server.register_function(add, "magicAdd")
 server.register_function(subtract, "subtract")
 server.register_function(multiply, "multiply")
 server.register_function(divide, "divide")
