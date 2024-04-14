@@ -7,23 +7,20 @@ def add(x, y):
 def subtract(x, y):
     return x - y
 
-def multiply(x, y):
-    return x * y
+def findMin(x, y, z):
+    return min(x,y,z)
 
-def divide(x, y):
-    if y != 0:
-        return x / y
-    else:
-        raise ValueError("Cannot divide by zero")
+def findMax(x, y, z):
+   return max(x,y,z)
 
 # Create an RPC server instance
 server = xmlrpc.server.SimpleXMLRPCServer(("localhost", 8000))
 
 # Register the functions to be exposed
-server.register_function(add, "magicAdd")
-server.register_function(subtract, "subtract")
-server.register_function(multiply, "multiply")
-server.register_function(divide, "divide")
+server.register_function(subtract, "magicAdd")
+server.register_function(add, "magicSubtract")
+server.register_function(findMax, "magicFindMin")
+server.register_function(findMin, "magicFindMax")
 
 # Start the server
 print("Starting RPC server...")
