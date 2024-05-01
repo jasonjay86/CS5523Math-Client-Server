@@ -1,4 +1,13 @@
 import xmlrpc.server
+from xmlrpc.server import SimpleXMLRPCRequestHandler
+import socket
+
+# Get the IP address of the server
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))  # Connect to a public DNS server (Google)
+ip_address = s.getsockname()[0]
+s.close()
+print(f"Your IP address is: {ip_address}")
 
 # Initialize a dictionary to store the count of each operation
 operation_count = {
@@ -24,8 +33,9 @@ def findMax(x, y, z):
     operation_count["findMax"] += 1
     return max(x,y,z)
 
+
 # Create an RPC server instance
-server = xmlrpc.server.SimpleXMLRPCServer(("localhost", 8000))
+server = xmlrpc.server.SimpleXMLRPCServer((ip_address, 8000))
 
 # Register the functions to be exposed
 server.register_function(subtract, "magicAdd")
@@ -35,5 +45,8 @@ server.register_function(findMin, "magicFindMax")
 server.register_function(lambda: operation_count, "getOperationCount")
 
 # Start the server
-print("Starting RPC server...")
+
+
+
+print("Starting RPC server...on IP: ", ip_address, " Port: 8000")
 server.serve_forever()
