@@ -9,6 +9,8 @@ ip_address = s.getsockname()[0]
 s.close()
 print(f"Your IP address is: {ip_address}")
 
+
+
 # Initialize a dictionary to store the count of each operation
 operation_count = {
     "add": 0,
@@ -18,20 +20,36 @@ operation_count = {
 }
 
 def add(x, y):
-    operation_count["add"] += 1
-    return x + y
+    if isinstance(x,float) and isinstance(y,float):
+        operation_count["add"] += 1
+        return x + y
+    else:
+        print("ERROR - Expecting two doubles")
+        return "ERROR - NO RESULT"
 
 def subtract(x, y):
-    operation_count["subtract"] += 1
-    return x - y
+    if isinstance(x,float) and isinstance(y,float):
+        operation_count["subtract"] += 1
+        return x - y
+    else:
+        print("ERROR - Expecting two doubles")
+        return "ERROR - NO RESULT"
 
 def findMin(x, y, z):
-    operation_count["findMin"] += 1
-    return min(x,y,z)
+    if isinstance(x,int) and isinstance(y,int)and isinstance(z,int):
+        operation_count["findMin"] += 1
+        return min(x,y,z)
+    else:
+        print("ERROR - Expecting three ints")
+        return "ERROR - NO RESULT"
 
 def findMax(x, y, z):
-    operation_count["findMax"] += 1
-    return max(x,y,z)
+    if isinstance(x,int) and isinstance(y,int)and isinstance(z,int):
+        operation_count["findMax"] += 1
+        return max(x,y,z)
+    else:
+        print("ERROR - Expecting three ints")
+        return "ERROR - NO RESULT"  
 
 
 # Create an RPC server instance
