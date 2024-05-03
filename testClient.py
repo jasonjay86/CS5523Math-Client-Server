@@ -1,6 +1,7 @@
 import xmlrpc.client
 import random
 import argparse
+import matplotlib.pyplot as plt
 
 def main(ip, count=10):
     # Create an RPC proxy object for the mathServer
@@ -39,6 +40,24 @@ def main(ip, count=10):
     # Get operation Counts
     result = proxy.getOperationCount()
     print("OperationCount ", result)
+
+    operations = list(result.keys())
+    counts = list(result.values())
+
+    # Create a bar chart
+    plt.figure(figsize=(10, 6))
+    plt.bar(operations, counts, color='skyblue')
+    plt.xlabel('Operation')
+    plt.ylabel('Count')
+    plt.title('Operation Counts')
+    plt.ylim(0, max(counts) + 20)  # Adding a buffer for better visualization
+    plt.grid(axis='y', linestyle='--', alpha=0.6)
+
+    # Save the chart as a PNG file
+    plt.savefig('operation_counts.png')
+
+    # Display the chart
+    plt.show()
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description="testClient.py - A simple RPC client to test the mathServer.py RPC server.")
